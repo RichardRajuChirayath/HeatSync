@@ -136,7 +136,7 @@ export default function Home() {
       <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-[#6366f1]/10 rounded-full blur-[150px] pointer-events-none" />
 
       {/* Header / Nav */}
-      <nav className="z-50 px-8 py-6 flex justify-between items-center bg-[#0d091a]/80 backdrop-blur-xl border-b border-white/5">
+      <nav className="z-50 px-8 py-6 flex justify-between items-center bg-[#0d091a]/80 backdrop-blur-xl border-b border-white/5 relative">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => setView("hero")}>
           <Logo className="w-14 h-14" />
           <span className="text-2xl font-black tracking-tighter">
@@ -144,9 +144,8 @@ export default function Home() {
           </span>
         </div>
         
-        <div className="hidden md:flex gap-8 text-sm font-medium text-white/70">
-          <button onClick={() => setView("discovery")} className="hover:text-[#a855f7] transition-colors">Find Charger</button>
-          <a href="#" className="hover:text-[#a855f7] transition-colors">Sustainability</a>
+        <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 text-sm font-black uppercase tracking-widest text-white/70">
+          <button onClick={() => setView("discovery")} className="hover:text-[#a855f7] transition-all hover:tracking-[0.2em]">Find Charger</button>
         </div>
 
         <div className="flex gap-4 items-center">
