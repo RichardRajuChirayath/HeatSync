@@ -1,0 +1,128 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  avatarUrl     String?
+  clerkId       String    @unique
+  vehicleModel  String?
+  plugType      PlugType?
+  walletBalance Float     @default(0.0)
+  isHost        Boolean   @default(false)
+  
+  chargers      Charger[]
+  bookings      Booking[]
+  reviews       Review[]
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Charger {
+  id              String    @id @default(cuid())
+  name            String
+  description     String?
+  address         String
+  latitude        Float
+  longitude       Float
+  speed           Float     // kW
+  plugType        PlugType
+  basePrice       Float     // Price per kWh or per hour
+  pricingType     PricingType @default(KWH)
+  
+  amenities       String[]  // e.g., ["WiFi", "Restroom"]
+  instructions    String?   // Access instructions
+  
+  // Renewable Energy Features
+  hasSolar        Boolean   @default(false)
+  hasBattery      Boolean   @default(false) // e.g., supercapacitor/battery buffer
+  
+  hostId          String
+  host            User      @relation(fields: [hostId], references: [id])
+  
+  bookings        Booking[]
+  reviews         Review[]
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Booking {
+  id            String        @id @default(cuid())
+  startTime     DateTime
+  endTime       DateTime
+  totalCost     Float
+  status        BookingStatus @default(PENDING)
+  
+  // Grid-Friendly Pricing Features
+  isDelayedStart Boolean      @default(false)
+  gridLoadFactor Float        @default(1.0)
+  
+  userId        String
+  user          User          @relation(fields: [userId], references: [id])
+  
+  chargerId     String
+  charger       Charger       @relation(fields: [chargerId], references: [id])
+  
+  paymentId     String?       // Razorpay payment ID
+  
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model Review {
+  id          String   @id @default(cuid())
+  rating      Int
+  comment     String?
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  
+  chargerId   String
+  charger     Charger  @relation(fields: [chargerId], references: [id])
+  
+  createdAt   DateTime @default(now())
+}
+
+model PublicStation {
+  id            String    @id @default(cuid())
+  externalId    String    @unique // OCPI / OCPP ID
+  name          String
+  location      String
+  latitude      Float
+  longitude     Float
+  operator      String
+  plugTypes     PlugType[]
+  status        String    @default("Available")
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+enum PlugType {
+  TYPE_2
+  CCS_2
+  CHAdeMO
+  TESLA_NACS
+}
+
+enum PricingType {
+  KWH
+  HOUR
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
