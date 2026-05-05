@@ -15,7 +15,7 @@ export default function Logo({ className = "w-10 h-10" }: { className?: string }
         alt="SECURE-OHM Logo" 
         width={800} 
         height={800} 
-        className="w-full h-full object-contain filter drop-shadow-[0_0_25px_rgba(122,251,179,0.4)] scale-150"
+        className="w-full h-full object-contain filter drop-shadow-[0_0_25px_rgba(168,85,247,0.5)] scale-150"
         priority
       />
     </motion.div>

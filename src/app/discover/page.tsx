@@ -17,8 +17,8 @@ import Logo from "@/components/Logo";
 const Map = dynamic(() => import("@/components/Map"), {
   ssr: false,
   loading: () => (
-    <div className="h-full w-full bg-secondary animate-pulse rounded-2xl flex flex-col items-center justify-center gap-4 border border-white/5">
-      <Zap className="w-12 h-12 text-primary/50 animate-bounce" />
+    <div className="h-full w-full bg-[#1a162e] animate-pulse rounded-2xl flex flex-col items-center justify-center gap-4 border border-white/5">
+      <Zap className="w-12 h-12 text-[#a855f7]/50 animate-bounce" />
       <span className="text-xs text-white/30 font-medium tracking-widest uppercase">Initializing OSM Nodes...</span>
     </div>
   ),
@@ -35,6 +35,7 @@ export default function Home() {
   const [selectedChargerId, setSelectedChargerId] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<SortOption>("nearest");
   const [mapTheme, setMapTheme] = useState<"light" | "dark">("dark");
+  const [transactionId, setTransactionId] = useState("");
   
   // Booking State
   const [bookingCharger, setBookingCharger] = useState<Charger | null>(null);
@@ -52,10 +53,8 @@ export default function Home() {
   const [custH, setCustH] = useState("12");
   const [custM, setCustM] = useState("00");
   const [custP, setCustP] = useState("PM");
-  const [transactionId, setTransactionId] = useState("");
 
   const timeSlots = ["09:00 AM", "10:30 AM", "12:00 PM", "02:30 PM", "04:00 PM", "06:30 PM"];
-
 
   useEffect(() => {
     if (isCustomTime) {
@@ -131,32 +130,31 @@ export default function Home() {
   };
 
   return (
-    <main className="flex-1 flex flex-col relative overflow-hidden bg-background">
-      {/* Background Glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-accent/10 rounded-full blur-[120px] pointer-events-none" />
+    <main className="flex-1 flex flex-col relative overflow-hidden bg-[#0d091a]">
+      {/* ELECTRA Background Glows */}
+      <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-[#a855f7]/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-[#6366f1]/10 rounded-full blur-[150px] pointer-events-none" />
 
       {/* Header / Nav */}
-      <nav className="z-50 px-8 py-6 flex justify-between items-center bg-background/50 backdrop-blur-md border-b border-white/5">
+      <nav className="z-50 px-8 py-6 flex justify-between items-center bg-[#0d091a]/80 backdrop-blur-xl border-b border-white/5">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => setView("hero")}>
           <Logo className="w-14 h-14" />
           <span className="text-2xl font-black tracking-tighter">
-            SECURE-<span className="text-primary">OHM</span>
+            SECURE-<span className="text-[#a855f7]">OHM</span>
           </span>
         </div>
-
         
         <div className="hidden md:flex gap-8 text-sm font-medium text-white/70">
-          <button onClick={() => setView("discovery")} className="hover:text-primary transition-colors">Find Charger</button>
-          <a href="#" className="hover:text-primary transition-colors">Sustainability</a>
+          <button onClick={() => setView("discovery")} className="hover:text-[#a855f7] transition-colors">Find Charger</button>
+          <a href="#" className="hover:text-[#a855f7] transition-colors">Sustainability</a>
         </div>
 
         <div className="flex gap-4 items-center">
           <Show when="signed-out">
             <SignInButton mode="modal">
-              <button className="px-5 py-2 text-sm font-bold hover:text-primary transition-colors cursor-pointer">Login</button>
+              <button className="px-5 py-2 text-sm font-bold hover:text-[#a855f7] transition-colors cursor-pointer">Login</button>
             </SignInButton>
-            <button onClick={() => setView("discovery")} className="neon-button">Explore</button>
+            <button onClick={() => setView("discovery")} className="neon-button px-6 py-2">Explore</button>
           </Show>
           <Show when="signed-in">
             <UserButton appearance={{ baseTheme: dark }} />
@@ -176,7 +174,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-8"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#a855f7]/10 border border-[#a855f7]/20 text-[#a855f7] text-xs font-bold mb-8"
             >
               <Activity className="w-4 h-4" />
               <span>Phase 2: Discovery Engine Active</span>
@@ -189,7 +187,7 @@ export default function Home() {
               className="text-6xl md:text-8xl font-bold mb-6 tracking-tight leading-[1.1]"
             >
               Power to the <br />
-              <span className="text-primary drop-shadow-[0_0_15px_var(--primary-glow)]">People.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#6366f1] drop-shadow-[0_0_20px_rgba(168,85,247,0.3)]">People.</span>
             </motion.h1>
 
             <motion.p 
@@ -226,15 +224,15 @@ export default function Home() {
           >
             {/* Sidebar */}
             <div className="w-full md:w-[400px] flex flex-col gap-6">
-              <div className="glass-card p-6">
+              <div className="glass-card p-6 border-[#a855f7]/10">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2 text-primary">
+                  <div className="flex items-center gap-2 text-[#a855f7]">
                     <MapPin className="w-5 h-5" />
                     <span className="font-bold text-sm uppercase tracking-wider">Discovery Engine</span>
                   </div>
                   <button 
                     onClick={() => setMapTheme(mapTheme === "dark" ? "light" : "dark")}
-                    className="p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-white/50 hover:text-primary"
+                    className="p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-white/50 hover:text-[#a855f7]"
                   >
                     {mapTheme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
                   </button>
@@ -245,7 +243,7 @@ export default function Home() {
                   <input 
                     type="text" 
                     placeholder="Search destination..."
-                    className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-sm focus:outline-none focus:border-primary/50 transition-colors"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-sm focus:outline-none focus:border-[#a855f7]/50 transition-colors"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
@@ -258,7 +256,7 @@ export default function Home() {
                       <button 
                         key={opt}
                         onClick={() => setSortBy(opt as SortOption)}
-                        className={`py-2 text-[10px] font-bold rounded-lg border transition-all capitalize ${sortBy === opt ? "bg-primary text-black border-primary" : "bg-white/5 border-white/10 text-white/50"}`}
+                        className={`py-2 text-[10px] font-bold rounded-lg border transition-all capitalize ${sortBy === opt ? "bg-[#a855f7] text-white border-[#a855f7]" : "bg-white/5 border-white/10 text-white/50"}`}
                       >
                         {opt}
                       </button>
@@ -267,7 +265,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="flex-1 glass-card p-6 overflow-hidden flex flex-col">
+              <div className="flex-1 glass-card p-6 overflow-hidden flex flex-col border-[#a855f7]/10">
                 <h2 className="font-bold mb-4 flex justify-between items-center">
                   Available Nodes
                   <span className="text-[10px] text-white/30 uppercase tracking-widest">{sortedChargers.length} found</span>
@@ -282,21 +280,21 @@ export default function Home() {
                       onClick={() => setSelectedChargerId(charger.id)}
                       className={`p-4 rounded-xl border transition-all cursor-pointer group ${
                         selectedChargerId === charger.id 
-                        ? 'bg-primary/10 border-primary shadow-[0_0_15px_rgba(0,242,255,0.1)]' 
-                        : 'bg-white/5 border-white/10 hover:border-primary/30'
+                        ? 'bg-[#a855f7]/10 border-[#a855f7] shadow-[0_0_15px_rgba(168,85,247,0.1)]' 
+                        : 'bg-white/5 border-white/10 hover:border-[#a855f7]/30'
                       }`}
                     >
                       <div className="flex justify-between items-start mb-2">
-                        <h3 className={`font-bold transition-colors ${selectedChargerId === charger.id ? 'text-primary' : 'group-hover:text-primary'}`}>
+                        <h3 className={`font-bold transition-colors ${selectedChargerId === charger.id ? 'text-[#a855f7]' : 'group-hover:text-[#a855f7]'}`}>
                           {charger.name}
                         </h3>
-                        <span className="text-xs font-bold text-primary">₹{(charger.price * 80).toFixed(0)}/kWh</span>
+                        <span className="text-xs font-bold text-[#a855f7]">₹{(charger.price * 80).toFixed(0)}/kWh</span>
                       </div>
                       <p className="text-[10px] text-white/40 mb-3">{charger.address}</p>
                       
                       <div className="flex justify-between items-center">
                         <div className="flex gap-2">
-                          <span className="text-[10px] px-2 py-1 bg-primary/10 text-primary rounded border border-primary/20 flex items-center gap-1 font-bold">
+                          <span className="text-[10px] px-2 py-1 bg-[#a855f7]/10 text-[#a855f7] rounded border border-[#a855f7]/20 flex items-center gap-1 font-bold">
                             <Zap className="w-3 h-3" /> {charger.speed}kW
                           </span>
                         </div>
@@ -305,7 +303,7 @@ export default function Home() {
                             e.stopPropagation();
                             setBookingCharger(charger);
                           }}
-                          className="px-3 py-1.5 bg-primary text-black text-[10px] font-bold rounded-lg hover:bg-white transition-colors"
+                          className="px-3 py-1.5 bg-[#a855f7] text-white text-[10px] font-bold rounded-lg hover:bg-[#6366f1] transition-colors"
                         >
                           Book Now
                         </button>
@@ -334,15 +332,15 @@ export default function Home() {
                  <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="absolute bottom-6 left-6 right-6 z-[1000] glass-card p-6 border-primary/30 bg-black/60 backdrop-blur-xl flex items-center justify-between"
+                    className="absolute bottom-6 left-6 right-6 z-[1000] glass-card p-6 border-[#a855f7]/30 bg-[#0d091a]/80 backdrop-blur-xl flex items-center justify-between"
                  >
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-[0_0_20px_var(--primary-glow)] animate-pulse">
-                        <Navigation2 className="text-black w-6 h-6 fill-current" />
+                      <div className="w-12 h-12 bg-[#a855f7] rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(168,85,247,0.4)] animate-pulse">
+                        <Navigation2 className="text-white w-6 h-6 fill-current" />
                       </div>
                       <div>
                         <div className="text-xs text-white/40 font-bold uppercase tracking-widest">En route to</div>
-                        <div className="text-xl font-bold text-primary">{bookingCharger?.name}</div>
+                        <div className="text-xl font-bold text-[#a855f7]">{bookingCharger?.name}</div>
                       </div>
                     </div>
                     <div className="text-right">
@@ -368,7 +366,7 @@ export default function Home() {
             <motion.div 
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
-              className="glass-card max-w-md w-full p-8 border-white/10 relative overflow-hidden"
+              className="glass-card max-w-md w-full p-8 border-[#a855f7]/20 relative overflow-hidden"
             >
               {navStatus === "idle" && (
                 <button 
@@ -386,7 +384,7 @@ export default function Home() {
               {/* Step 1: Checking Availability */}
               {bookingStatus === "checking" && navStatus === "idle" && (
                 <div className="py-12 flex flex-col items-center text-center">
-                  <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: "linear" }} className="mb-6"><Loader2 className="w-12 h-12 text-primary" /></motion.div>
+                  <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: "linear" }} className="mb-6"><Loader2 className="w-12 h-12 text-[#a855f7]" /></motion.div>
                   <h3 className="text-xl font-bold mb-2">Pinging Transformer...</h3>
                   <p className="text-white/40 text-xs">Verifying slot availability with local grid nodes.</p>
                 </div>
@@ -403,7 +401,7 @@ export default function Home() {
 
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-[10px] text-white/30 uppercase tracking-widest font-bold">Choose Arrival Time</span>
-                    <button onClick={() => setIsCustomTime(!isCustomTime)} className="text-primary text-[10px] font-bold flex items-center gap-1 hover:underline"><Edit3 className="w-3 h-3" /> {isCustomTime ? "Show Slots" : "Custom Time"}</button>
+                    <button onClick={() => setIsCustomTime(!isCustomTime)} className="text-[#a855f7] text-[10px] font-bold flex items-center gap-1 hover:underline"><Edit3 className="w-3 h-3" /> {isCustomTime ? "Show Slots" : "Custom Time"}</button>
                   </div>
 
                   {isCustomTime ? (
@@ -415,7 +413,7 @@ export default function Home() {
                       <select value={custM} onChange={(e) => setCustM(e.target.value)} className="flex-1 bg-white/5 border border-white/10 rounded-xl py-4 text-center font-bold appearance-none">
                         {["00", "15", "30", "45"].map(m => <option key={m} value={m} className="bg-[#1a1a1a]">{m}</option>)}
                       </select>
-                      <select value={custP} onChange={(e) => setCustP(e.target.value)} className="flex-1 bg-primary/10 border border-primary/20 rounded-xl py-4 text-center font-bold appearance-none text-primary">
+                      <select value={custP} onChange={(e) => setCustP(e.target.value)} className="flex-1 bg-[#a855f7]/10 border border-[#a855f7]/20 rounded-xl py-4 text-center font-bold appearance-none text-[#a855f7]">
                         <option value="AM" className="bg-[#1a1a1a]">AM</option>
                         <option value="PM" className="bg-[#1a1a1a]">PM</option>
                       </select>
@@ -423,12 +421,12 @@ export default function Home() {
                   ) : (
                     <div className="grid grid-cols-3 gap-2 mb-8">
                       {timeSlots.map((time) => (
-                        <button key={time} onClick={() => setSelectedTime(time)} className={`py-3 rounded-xl border text-[10px] font-bold transition-all ${selectedTime === time ? 'bg-primary border-primary text-black' : 'bg-white/5 border-white/10 text-white/50'}`}>{time}</button>
+                        <button key={time} onClick={() => setSelectedTime(time)} className={`py-3 rounded-xl border text-[10px] font-bold transition-all ${selectedTime === time ? 'bg-[#a855f7] border-[#a855f7] text-white' : 'bg-white/5 border-white/10 text-white/50'}`}>{time}</button>
                       ))}
                     </div>
                   )}
 
-                  <button disabled={!selectedTime} onClick={handleBookingRequest} className="w-full py-4 bg-primary text-black font-bold rounded-xl shadow-[0_0_20px_var(--primary-glow)] disabled:opacity-30 transition-all hover:scale-[1.02]">Confirm Booking Request</button>
+                  <button disabled={!selectedTime} onClick={handleBookingRequest} className="neon-button w-full py-4 text-base disabled:opacity-30">Confirm Booking Request</button>
                 </>
               )}
 
@@ -436,11 +434,11 @@ export default function Home() {
               {(bookingStatus === "requesting" || bookingStatus === "pending") && navStatus === "idle" && (
                 <div className="py-12 flex flex-col items-center text-center">
                   <div className="relative w-20 h-20 mb-6">
-                    <div className="absolute inset-0 border-4 border-primary/20 rounded-full" />
-                    <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }} className="absolute inset-0 border-4 border-primary border-t-transparent rounded-full shadow-[0_0_15px_var(--primary-glow)]" />
+                    <div className="absolute inset-0 border-4 border-[#a855f7]/20 rounded-full" />
+                    <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }} className="absolute inset-0 border-4 border-[#a855f7] border-t-transparent rounded-full shadow-[0_0_15px_rgba(168,85,247,0.4)]" />
                   </div>
                   <h3 className="text-xl font-bold mb-2">{bookingStatus === "requesting" ? "Broadcasting Request..." : "Waiting for Host Approval"}</h3>
-                  <p className="text-white/40 text-xs">Your request for <span className="text-primary font-bold">{selectedTime}</span> has been sent.</p>
+                  <p className="text-white/40 text-xs">Your request for <span className="text-[#a855f7] font-bold">{selectedTime}</span> has been sent.</p>
                 </div>
               )}
 
@@ -450,7 +448,7 @@ export default function Home() {
                   <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mb-6 border border-green-500/30"><CheckCircle2 className="w-10 h-10 text-green-500" /></div>
                   <h3 className="text-2xl font-bold text-green-400 mb-2">Booking Confirmed!</h3>
                   <p className="text-white/50 text-sm mb-8">Host approved arrival at <span className="text-white font-bold">{selectedTime}</span>.</p>
-                  <button onClick={startNavigation} className="w-full py-4 bg-primary text-black font-bold rounded-xl shadow-[0_0_20px_var(--primary-glow)] flex items-center justify-center gap-2">
+                  <button onClick={startNavigation} className="neon-button w-full py-4 text-base">
                     <Navigation2 className="w-5 h-5 fill-current" /> Start Navigation
                   </button>
                 </motion.div>
@@ -459,13 +457,13 @@ export default function Home() {
               {/* Step 6: Arrived & Charge Prompt */}
               {navStatus === "arrived" && (
                 <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="py-8 flex flex-col items-center text-center">
-                  <div className="w-24 h-24 bg-primary/20 rounded-3xl flex items-center justify-center mb-8 border border-primary/30 shadow-[0_0_30px_rgba(0,242,255,0.2)]">
-                    <BatteryCharging className="w-12 h-12 text-primary animate-pulse" />
+                  <div className="w-24 h-24 bg-[#a855f7]/20 rounded-3xl flex items-center justify-center mb-8 border border-[#a855f7]/30 shadow-[0_0_30px_rgba(168,85,247,0.2)]">
+                    <BatteryCharging className="w-12 h-12 text-[#a855f7] animate-pulse" />
                   </div>
                   <h3 className="text-3xl font-bold mb-4 tracking-tighter">You Have Arrived!</h3>
                   <p className="text-white/50 mb-10 text-sm leading-relaxed px-4">Vehicle successfully paired with <span className="text-white font-bold">{bookingCharger?.name}</span>. Grid capacity is optimal.</p>
                   <div className="flex flex-col gap-3 w-full">
-                    <button onClick={() => setNavStatus("charging")} className="w-full py-5 bg-primary text-black font-bold rounded-2xl shadow-[0_0_20px_var(--primary-glow)] text-lg hover:scale-[1.02] transition-transform">Yes, Start Charging</button>
+                    <button onClick={() => setNavStatus("charging")} className="neon-button w-full py-5 text-lg">Yes, Start Charging</button>
                     <button onClick={() => {setNavStatus("idle"); setBookingCharger(null);}} className="w-full py-4 bg-white/5 hover:bg-white/10 text-white/50 font-bold rounded-2xl transition-all">No, Not Now</button>
                   </div>
                 </motion.div>
@@ -474,10 +472,10 @@ export default function Home() {
               {/* Step 7: Live Charging Metrics */}
               {navStatus === "charging" && (
                 <div className="py-6 flex flex-col items-center text-center">
-                   <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 border border-primary/20 shadow-[0_0_15px_rgba(0,242,255,0.1)]">
-                    <Zap className="w-8 h-8 text-primary animate-bounce" />
+                   <div className="w-16 h-16 bg-[#a855f7]/10 rounded-2xl flex items-center justify-center mb-6 border border-[#a855f7]/20 shadow-[0_0_15px_rgba(168,85,247,0.1)]">
+                    <Zap className="w-8 h-8 text-[#a855f7] animate-bounce" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-2 tracking-tighter text-primary">Charging Session</h3>
+                  <h3 className="text-2xl font-bold mb-2 tracking-tighter text-[#a855f7]">Charging Session</h3>
                   <p className="text-white/40 text-xs mb-8">Node: {bookingCharger?.name}</p>
                   
                   <div className="grid grid-cols-2 gap-4 w-full mb-8">
@@ -492,10 +490,10 @@ export default function Home() {
                   </div>
 
                   <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden mb-8">
-                    <motion.div animate={{ x: ["-100%", "100%"] }} transition={{ repeat: Infinity, duration: 2, ease: "linear" }} className="h-full w-1/3 bg-primary shadow-[0_0_10px_var(--primary-glow)]" />
+                    <motion.div animate={{ x: ["-100%", "100%"] }} transition={{ repeat: Infinity, duration: 2, ease: "linear" }} className="h-full w-1/3 bg-[#a855f7] shadow-[0_0_10px_rgba(168,85,247,0.5)]" />
                   </div>
 
-                  <div className="flex items-center gap-2 text-xs text-green-400 font-bold mb-10">
+                  <div className="flex items-center gap-2 text-xs text-indigo-400 font-bold mb-10">
                     <TrendingUp className="w-4 h-4" /> Eco-Mode Active: 100% Solar Offset
                   </div>
 
@@ -512,14 +510,13 @@ export default function Home() {
               {navStatus === "payment" && (
                 <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="py-4">
                   <div className="flex items-center gap-3 mb-8">
-                    <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center border border-primary/30">
-                       <CreditCard className="w-5 h-5 text-primary" />
+                    <div className="w-10 h-10 bg-[#a855f7]/20 rounded-full flex items-center justify-center border border-[#a855f7]/30">
+                       <CreditCard className="w-5 h-5 text-[#a855f7]" />
                     </div>
                     <div>
                       <h3 className="text-xl font-bold">Payment Summary</h3>
                       <p className="text-[10px] text-white/30 uppercase tracking-widest">Transaction ID: {transactionId}</p>
                     </div>
-
                   </div>
 
                   <div className="space-y-4 mb-10">
@@ -533,23 +530,23 @@ export default function Home() {
                     </div>
                     <div className="flex justify-between items-center py-4">
                       <span className="text-lg font-bold">Total Amount</span>
-                      <span className="text-2xl font-black text-primary">₹{(livePrice + 15).toFixed(0)}</span>
+                      <span className="text-2xl font-black text-[#a855f7]">₹{(livePrice + 15).toFixed(0)}</span>
                     </div>
                   </div>
 
                   {isProcessingPayment ? (
                     <div className="py-10 flex flex-col items-center text-center">
                        <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1 }} className="mb-4">
-                         <Loader2 className="w-12 h-12 text-primary" />
+                         <Loader2 className="w-12 h-12 text-[#a855f7]" />
                        </motion.div>
-                       <p className="text-primary font-bold animate-pulse">Processing via Razorpay Secure...</p>
+                       <p className="text-[#a855f7] font-bold animate-pulse">Processing via Razorpay Secure...</p>
                        <p className="text-[10px] text-white/30 mt-2 italic">Do not close this window</p>
                     </div>
                   ) : (
                     <div className="space-y-3">
                       <button 
                         onClick={processPayment}
-                        className="w-full py-5 bg-[#3395FF] text-white font-bold rounded-2xl shadow-[0_10px_20px_rgba(51,149,255,0.2)] flex items-center justify-center gap-3 hover:scale-[1.02] transition-transform"
+                        className="neon-button w-full py-5 text-base shadow-[0_10px_20px_rgba(168,85,247,0.2)]"
                       >
                         <CreditCard className="w-5 h-5" /> Pay with Razorpay
                       </button>
@@ -575,7 +572,7 @@ export default function Home() {
                   <h2 className="text-3xl font-black text-white mb-2 tracking-tighter">Paid Successfully!</h2>
                   <p className="text-white/40 text-sm mb-10">Your transaction has been confirmed by the node host.</p>
                   
-                  <div className="w-full glass-card bg-white/5 border-dashed border-white/10 p-6 mb-10 relative">
+                  <div className="w-full glass-card bg-white/5 border-dashed border-[#a855f7]/20 p-6 mb-10 relative">
                     <div className="absolute top-0 left-0 w-4 h-4 bg-black rounded-br-full -translate-x-1/2 -translate-y-1/2" />
                     <div className="absolute top-0 right-0 w-4 h-4 bg-black rounded-bl-full translate-x-1/2 -translate-y-1/2" />
                     
@@ -591,7 +588,7 @@ export default function Home() {
                     
                     <div className="pt-4 border-t border-white/10 flex justify-between items-end">
                        <span className="text-[10px] text-white/30 font-bold uppercase">Total Paid</span>
-                       <span className="text-2xl font-black text-primary">₹{(livePrice + 15).toFixed(0)}</span>
+                       <span className="text-2xl font-black text-[#a855f7]">₹{(livePrice + 15).toFixed(0)}</span>
                     </div>
                   </div>
 
