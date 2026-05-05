@@ -25,7 +25,7 @@ export default function HybridLoginPortal() {
       <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,#3b0764,transparent)] pointer-events-none opacity-40" />
       <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-[radial-gradient(circle_at_100%_100%,#1e1b4b,transparent)] pointer-events-none opacity-30" />
 
-      {/* Circuit Background Decorations (Updated to Purple) */}
+      {/* Circuit Background Decorations */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <pattern id="circuit" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
@@ -37,7 +37,7 @@ export default function HybridLoginPortal() {
         </svg>
       </div>
 
-      {/* Main Container - Optimized for Single Screen Visibility */}
+      {/* Main Container */}
       <div className="max-w-7xl w-full flex flex-col items-center z-10 py-4">
         
         <div className="w-full flex flex-col md:flex-row items-stretch justify-center gap-0 relative">
@@ -46,15 +46,21 @@ export default function HybridLoginPortal() {
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex-1 flex flex-col items-center p-4 relative"
+            className="flex-1 flex flex-col items-center p-4 relative group"
           >
             <div className="text-center mb-4">
               <h2 className="text-sm font-bold tracking-[0.2em] uppercase text-white/40">User: Find a Charger</h2>
             </div>
 
-            {/* Technical Map Decoration (Purple Glow) */}
+            {/* Technical Map Decoration */}
             <div className="absolute top-16 left-8 right-8 h-48 opacity-20 pointer-events-none">
                <div className="w-full h-full border border-[#a855f7]/20 rounded-2xl bg-black/40 overflow-hidden relative">
+                  {/* Laser Scan Effect */}
+                  <motion.div 
+                    animate={{ top: ["-10%", "110%"] }}
+                    transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
+                    className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#a855f7] to-transparent shadow-[0_0_15px_#a855f7] z-10"
+                  />
                   <div className="absolute inset-0 grid grid-cols-10 grid-rows-10 border-[#a855f7]/5 border">
                     {mounted && Array.from({ length: 15 }).map((_, i) => (
                       <div key={i} className="absolute w-1 h-1 bg-[#a855f7] rounded-full animate-pulse shadow-[0_0_8px_#a855f7]" style={{ 
@@ -67,8 +73,11 @@ export default function HybridLoginPortal() {
             </div>
 
             {/* Feature Card */}
-            <div className="glass-card w-full max-w-sm p-8 relative z-20 mt-6 flex flex-col items-center text-center">
-               <div className="w-12 h-12 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center mb-6 shadow-inner group hover:border-[#a855f7]/40 transition-colors">
+            <motion.div 
+              whileHover={{ scale: 1.02, translateY: -5 }}
+              className="glass-card w-full max-w-sm p-8 relative z-20 mt-6 flex flex-col items-center text-center transition-all duration-500 hover:border-[#a855f7]/40"
+            >
+               <div className="w-12 h-12 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center mb-6 shadow-inner group-hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all">
                   <User className="w-6 h-6 text-[#a855f7]" />
                </div>
 
@@ -77,7 +86,6 @@ export default function HybridLoginPortal() {
                  Find the nearest private charging nodes. Real-time availability, grid-aware pricing, and seamless one-tap payments.
                </p>
 
-               {/* Tags */}
                <div className="flex flex-wrap justify-center gap-2 mb-6 opacity-60 scale-75">
                   {["FAST NODES", "OSM MAPS", "AUTO-AUTH"].map(tag => (
                     <span key={tag} className="px-3 py-1 bg-white/10 rounded-full text-[9px] font-black tracking-widest">{tag}</span>
@@ -89,36 +97,58 @@ export default function HybridLoginPortal() {
                     Enter as Driver <ChevronRight className="w-4 h-4 stroke-[3px]" />
                  </button>
                </Link>
-            </div>
+            </motion.div>
           </motion.div>
 
-          {/* CENTRAL DIVIDER - ELECTRA STYLE */}
+          {/* CENTRAL DIVIDER - ENERGY PULSE SYSTEM */}
           <div className="hidden md:flex flex-col items-center relative w-16">
              {/* Line Top */}
-             <div className="flex-1 w-[2px] bg-gradient-to-t from-[#a855f7] to-transparent shadow-[0_0_20px_#a855f7]" />
+             <div className="flex-1 w-[2px] bg-gradient-to-t from-[#a855f7] to-transparent shadow-[0_0_20px_#a855f7] relative overflow-hidden">
+                <motion.div 
+                  animate={{ top: ["-100%", "100%"] }}
+                  transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+                  className="absolute left-0 right-0 h-20 bg-gradient-to-b from-transparent via-white to-transparent opacity-50"
+                />
+             </div>
              
              {/* Logo Container */}
-             <div className="z-30 py-8 flex items-center justify-center">
+             <motion.div 
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                className="z-30 py-8 flex items-center justify-center"
+             >
                <Logo className="w-32 h-32 drop-shadow-[0_0_40px_rgba(168,85,247,0.6)]" />
-             </div>
+             </motion.div>
 
              {/* Line Bottom */}
-             <div className="flex-1 w-[2px] bg-gradient-to-b from-[#a855f7] to-transparent shadow-[0_0_20px_#a855f7]" />
+             <div className="flex-1 w-[2px] bg-gradient-to-b from-[#a855f7] to-transparent shadow-[0_0_20px_#a855f7] relative overflow-hidden">
+                <motion.div 
+                  animate={{ top: ["-100%", "100%"] }}
+                  transition={{ repeat: Infinity, duration: 2, ease: "linear", delay: 0.5 }}
+                  className="absolute left-0 right-0 h-20 bg-gradient-to-b from-transparent via-white to-transparent opacity-50"
+                />
+             </div>
           </div>
 
           {/* Right Side: HOST PORTAL */}
           <motion.div 
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex-1 flex flex-col items-center p-4 relative"
+            className="flex-1 flex flex-col items-center p-4 relative group"
           >
             <div className="text-center mb-4">
               <h2 className="text-sm font-bold tracking-[0.2em] uppercase text-white/40">Host: List Your Charger</h2>
             </div>
 
-            {/* Technical Chart Decoration (Indigo Glow) */}
+            {/* Technical Chart Decoration */}
             <div className="absolute top-16 left-8 right-8 h-48 opacity-20 pointer-events-none">
                <div className="w-full h-full border border-[#6366f1]/20 rounded-2xl bg-black/40 overflow-hidden relative">
+                  {/* Laser Scan Effect */}
+                  <motion.div 
+                    animate={{ top: ["110%", "-10%"] }}
+                    transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
+                    className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#6366f1] to-transparent shadow-[0_0_15px_#6366f1] z-10"
+                  />
                   <svg viewBox="0 0 400 200" className="w-full h-full p-8 opacity-40">
                     <path d="M0 150 Q 50 100, 100 130 T 200 80 T 300 110 T 400 50" stroke="#6366f1" strokeWidth="2" fill="none" />
                     <line x1="0" y1="180" x2="400" y2="180" stroke="#fff" strokeWidth="0.5" strokeDasharray="4" />
@@ -127,8 +157,11 @@ export default function HybridLoginPortal() {
             </div>
 
             {/* Feature Card */}
-            <div className="glass-card w-full max-w-sm p-8 relative z-20 mt-6 flex flex-col items-center text-center">
-               <div className="w-12 h-12 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center mb-6 shadow-inner group hover:border-[#6366f1]/40 transition-colors">
+            <motion.div 
+              whileHover={{ scale: 1.02, translateY: -5 }}
+              className="glass-card w-full max-sm p-8 relative z-20 mt-6 flex flex-col items-center text-center transition-all duration-500 hover:border-[#6366f1]/40"
+            >
+               <div className="w-12 h-12 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center mb-6 shadow-inner group-hover:shadow-[0_0_20px_rgba(99,102,241,0.2)] transition-all">
                   <Store className="w-6 h-6 text-[#6366f1]" />
                </div>
 
@@ -137,7 +170,6 @@ export default function HybridLoginPortal() {
                  Monetize your home charger. Manage listings, track real-time earnings, and contribute to a greener grid.
                </p>
 
-               {/* Tags */}
                <div className="flex flex-wrap justify-center gap-2 mb-6 opacity-60 scale-75">
                   {["REVENUE ANALYTICS", "GRID DATA", "P2P ESCROW"].map(tag => (
                     <span key={tag} className="px-3 py-1 bg-white/10 rounded-full text-[9px] font-black tracking-widest">{tag}</span>
@@ -149,12 +181,12 @@ export default function HybridLoginPortal() {
                     Enter Seller Admin <ChevronRight className="w-4 h-4 stroke-[3px]" />
                  </button>
                </Link>
-            </div>
+            </motion.div>
           </motion.div>
 
         </div>
 
-        {/* Unified Subsurface Branding - PULLED UP */}
+        {/* Unified Subsurface Branding */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -166,7 +198,14 @@ export default function HybridLoginPortal() {
              <Shield className="w-4 h-4 text-[#a855f7]" />
              <div className="h-[1px] w-8 bg-white/10" />
           </div>
-          <h1 className="text-3xl font-black tracking-tighter uppercase italic">SECURE-<span className="text-[#a855f7]">OHM</span></h1>
+          
+          <motion.div
+            animate={{ opacity: [1, 0.8, 1], filter: ["brightness(1)", "brightness(1.5)", "brightness(1)"] }}
+            transition={{ repeat: Infinity, duration: 4 }}
+          >
+            <h1 className="text-3xl font-black tracking-tighter uppercase italic">SECURE-<span className="text-[#a855f7]">OHM</span></h1>
+          </motion.div>
+          
           <p className="text-white/30 text-[9px] font-black uppercase tracking-[0.6em]">
             SECURE PEER-TO-PEER PROTOCOL V1.0
           </p>
