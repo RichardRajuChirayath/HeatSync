@@ -12,14 +12,14 @@
 }
 
 :root {
-  --background: #0a0a0a;
+  --background: #0a0b14;
   --foreground: #ffffff;
-  --primary: #00f2ff;
-  --primary-glow: rgba(0, 242, 255, 0.3);
-  --secondary: #1a1a1a;
-  --accent: #7000ff;
+  --primary: #7AFBB3;
+  --primary-glow: rgba(122, 251, 179, 0.3);
+  --secondary: #161826;
+  --accent: #00f2ff;
   --glass: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
 @layer base {
@@ -35,23 +35,21 @@
   }
   
   .neon-button {
-    @apply relative px-6 py-3 rounded-full bg-[var(--primary)] text-black font-bold transition-all duration-300 hover:shadow-[0_0_20px_var(--primary-glow)] active:scale-95;
+    @apply relative px-8 py-4 rounded-2xl bg-[var(--primary)] text-black font-black transition-all duration-300 hover:shadow-[0_0_30px_var(--primary-glow)] hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2;
   }
   
   .neon-text {
-    @apply text-[var(--primary)] drop-shadow-[0_0_8px_var(--primary-glow)];
+    @apply text-[var(--primary)] drop-shadow-[0_0_12px_var(--primary-glow)];
   }
 }
 
 /* 🚀 ULTIMATE CLERK OVERRIDES 🚀 */
-/* This targets every possible text element in the Clerk UI to force visibility */
-
 .cl-rootBox * {
   color: #ffffff !important;
 }
 
 .cl-userButtonPopoverCard {
-  background-color: #1a1a1a !important;
+  background-color: #161826 !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
@@ -80,7 +78,7 @@
 .cl-userButtonPopoverActionButtonIcon,
 .cl-actionButtonIcon,
 .cl-accordionTriggerIcon {
-  color: #00f2ff !important;
+  color: #7AFBB3 !important;
 }
 
 .cl-userButtonPopoverActionButton:hover {
@@ -88,7 +86,7 @@
 }
 
 .cl-userButtonPopoverActionButtonText:hover {
-  color: #00f2ff !important;
+  color: #7AFBB3 !important;
 }
 
 /* Custom Scrollbar */

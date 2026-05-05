@@ -52,8 +52,10 @@ export default function Home() {
   const [custH, setCustH] = useState("12");
   const [custM, setCustM] = useState("00");
   const [custP, setCustP] = useState("PM");
+  const [transactionId, setTransactionId] = useState("");
 
   const timeSlots = ["09:00 AM", "10:30 AM", "12:00 PM", "02:30 PM", "04:00 PM", "06:30 PM"];
+
 
   useEffect(() => {
     if (isCustomTime) {
@@ -74,6 +76,12 @@ export default function Home() {
       return () => clearInterval(interval);
     }
   }, [navStatus, bookingCharger]);
+
+  useEffect(() => {
+    if (navStatus === "payment") {
+      setTransactionId(`HS-${Math.floor(100000 + Math.random() * 900000)}`);
+    }
+  }, [navStatus]);
 
   const sortedChargers = useMemo(() => {
     const list = [...activeChargers];
@@ -131,11 +139,12 @@ export default function Home() {
       {/* Header / Nav */}
       <nav className="z-50 px-8 py-6 flex justify-between items-center bg-background/50 backdrop-blur-md border-b border-white/5">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => setView("hero")}>
-          <Logo className="w-10 h-10" />
+          <Logo className="w-14 h-14" />
           <span className="text-2xl font-black tracking-tighter">
             SECURE-<span className="text-primary">OHM</span>
           </span>
         </div>
+
         
         <div className="hidden md:flex gap-8 text-sm font-medium text-white/70">
           <button onClick={() => setView("discovery")} className="hover:text-primary transition-colors">Find Charger</button>
@@ -508,8 +517,9 @@ export default function Home() {
                     </div>
                     <div>
                       <h3 className="text-xl font-bold">Payment Summary</h3>
-                      <p className="text-[10px] text-white/30 uppercase tracking-widest">Transaction ID: HS-{Math.floor(Math.random()*900000)}</p>
+                      <p className="text-[10px] text-white/30 uppercase tracking-widest">Transaction ID: {transactionId}</p>
                     </div>
+
                   </div>
 
                   <div className="space-y-4 mb-10">
