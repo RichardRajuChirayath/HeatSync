@@ -27,6 +27,7 @@ import { Show, UserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import Link from "next/link";
 import { useState } from "react";
+import Logo from "@/components/Logo";
 
 type HostTab = "dashboard" | "chargers" | "bookings" | "messages" | "settings";
 
@@ -65,10 +66,8 @@ export default function HostDashboard() {
       {/* Sidebar Navigation */}
       <aside className="w-72 border-r border-white/5 bg-secondary/30 backdrop-blur-2xl p-8 hidden lg:flex flex-col sticky top-0 h-screen">
         <Link href="/" className="flex items-center gap-2 mb-12">
-          <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-[0_0_20px_var(--primary-glow)]">
-            <Zap className="text-black w-6 h-6 fill-current" />
-          </div>
-          <span className="text-2xl font-bold tracking-tighter">HEAT<span className="text-primary">SYNC</span></span>
+          <Logo className="w-10 h-10" />
+          <span className="text-2xl font-black tracking-tighter">SECURE-<span className="text-primary">OHM</span></span>
         </Link>
 
         <nav className="flex-1 space-y-2">

@@ -11,6 +11,7 @@ import { useState, useMemo, useEffect } from "react";
 import { Show, UserButton, SignInButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import type { Charger } from "@/components/Map";
+import Logo from "@/components/Logo";
 
 // Dynamic import for Leaflet to avoid SSR issues
 const Map = dynamic(() => import("@/components/Map"), {
@@ -130,11 +131,9 @@ export default function Home() {
       {/* Header / Nav */}
       <nav className="z-50 px-8 py-6 flex justify-between items-center bg-background/50 backdrop-blur-md border-b border-white/5">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => setView("hero")}>
-          <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-[0_0_20px_var(--primary-glow)]">
-            <Zap className="text-black fill-current" />
-          </div>
-          <span className="text-2xl font-bold tracking-tighter">
-            HEAT<span className="text-primary">SYNC</span>
+          <Logo className="w-10 h-10" />
+          <span className="text-2xl font-black tracking-tighter">
+            SECURE-<span className="text-primary">OHM</span>
           </span>
         </div>
         
@@ -571,7 +570,7 @@ export default function Home() {
                     <div className="absolute top-0 right-0 w-4 h-4 bg-black rounded-bl-full translate-x-1/2 -translate-y-1/2" />
                     
                     <div className="flex justify-between items-center mb-6">
-                       <div className="flex items-center gap-2"><Zap className="w-4 h-4 text-primary" /> <span className="text-[10px] font-bold uppercase tracking-widest">HeatSync Receipt</span></div>
+                       <div className="flex items-center gap-2"><Logo className="w-6 h-6" /> <span className="text-[10px] font-bold uppercase tracking-widest">Secure-Ohm Receipt</span></div>
                        <div className="text-[10px] font-bold text-white/30">{new Date().toLocaleDateString()}</div>
                     </div>
                     

@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⚡ SECURE-OHM
+### The Decentralized Peer-to-Peer EV Charging Protocol
 
-## Getting Started
+![SECURE-OHM Banner](https://img.shields.io/badge/SECURE-OHM-7AFBB3?style=for-the-badge&logo=electric-vehicle&logoColor=black)
+![Version](https://img.shields.io/badge/Version-1.0.0--Stable-blue?style=for-the-badge)
+![UI](https://img.shields.io/badge/Design-Cyberpunk--Glassmorphism-purple?style=for-the-badge)
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🌐 Project Overview
+**SECURE-OHM** is a high-performance P2P charging ecosystem designed to bridge the gap between EV drivers and private charger owners. By decentralizing energy access, we allow homeowners to monetize their infrastructure while giving drivers a secure, reliable, and "grid-aware" charging experience.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🏎️ For Drivers (The Seekers)
+- **Real-Time Discovery**: Dynamic map interface to locate private charging nodes with zero latency.
+- **Grid-Aware Pricing**: Advanced algorithms calculate session costs based on real-time grid load and host-defined rates.
+- **Biometric Authentication**: Simulated high-security login portal for protected session management.
+- **Live Metrics**: Monitor unit consumption (kWh), duration, and cost in real-time.
 
-## Learn More
+### 🏠 For Hosts (The Providers)
+- **Monetization Engine**: Turn your home charger into a revenue-generating asset.
+- **Analytics Dashboard**: Comprehensive charts for revenue tracking, grid load monitoring, and session history.
+- **P2P Escrow**: Secure payment simulation ensuring fair exchange between host and driver.
+- **Fleet Management**: Easy tools to update charger availability and technical specifications.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Technology Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Layer | Technology |
+| :--- | :--- |
+| **Frontend** | [Next.js 14+](https://nextjs.org/) (App Router) |
+| **Styling** | [Tailwind CSS](https://tailwindcss.com/) + [Framer Motion](https://www.framer.com/motion/) |
+| **Icons** | [Lucide React](https://lucide.dev/) |
+| **Type Safety** | [TypeScript](https://www.typescriptlang.org/) |
+| **Animations** | Cinematic CSS Keyframes + Framer Motion |
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📸 Visual Identity
+The project features a **Cyberpunk / Glassmorphism** aesthetic, utilizing deep space palettes (`#0a0b14`) and high-contrast neon accents (`#7AFBB3`). The UI is designed to feel like a high-end energy terminal, prioritizing visual feedback and technical precision.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🛠️ Getting Started
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/RichardRajuChirayath/HeatSync.git
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Run the Development Server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Access the Portal**
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## ⚖️ Secure Protocol
+This project implements the **SECURE PEER-TO-PEER PROTOCOL V1.0**, ensuring that every electron exchanged is accounted for and every transaction is verified.
+
+---
+
+<div align="center">
+  <p>Built with ❤️ by the SECURE-OHM Team</p>
+  <p><i>Powering the future, one node at a time.</i></p>
+</div>

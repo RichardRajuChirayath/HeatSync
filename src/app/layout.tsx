@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "HeatSync | P2P EV Charging Network",
-  description: "Premium Peer-to-Peer EV Charging Network",
+  title: "SECURE-OHM | P2P EV Charging Network",
+  description: "Secure, decentralized, and grid-aware P2P electric vehicle charging network.",
 };
 
 export default function RootLayout({
