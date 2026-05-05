@@ -12,6 +12,10 @@
 ![Tailwind](https://img.shields.io/badge/Tailwind-CSS-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-00e5ff?style=flat-square)
 
+<br/>
+
+[![🚀 Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-7AFBB3?style=for-the-badge&logoColor=black)](https://heatsync-production.up.railway.app/)
+
 </div>
 
 ---
@@ -19,6 +23,16 @@
 ## 🌐 Project Overview
 
 **SECURE-OHM** is a high-performance P2P charging ecosystem designed to bridge the gap between EV drivers and private charger owners. By decentralizing energy access, we allow homeowners to monetize their infrastructure while giving drivers a secure, reliable, and grid-aware charging experience.
+
+---
+
+## 🌍 Live Deployment
+
+> **The protocol is live.** Access the production node directly:
+>
+> ### 🔗 [https://heatsync-production.up.railway.app/](https://heatsync-production.up.railway.app/)
+
+Deployed on **Railway** — zero-downtime, auto-scaling infrastructure.
 
 ---
 
@@ -65,12 +79,6 @@
 | **Icons** | [Lucide React](https://lucide.dev/) |
 | **Type Safety** | [TypeScript](https://www.typescriptlang.org/) — Strict Mode |
 | **Animations** | Cinematic CSS Keyframes + Framer Motion |
-
----
-
-## 📸 Visual Identity
-
-The project features a **Cyberpunk / Glassmorphism** aesthetic, utilizing deep space palettes (`#0a0b14`) and high-contrast neon accents (`#7AFBB3`). The UI is designed to feel like a high-end energy terminal, prioritizing visual feedback and technical precision.
 
 ---
 
