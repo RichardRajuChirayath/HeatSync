@@ -7,13 +7,29 @@ import {
   Store, 
   ChevronRight,
   Zap,
-  Lock
+  Lock,
+  Battery
 } from "lucide-react";
 import Link from "next/link";
 import Logo from "@/components/Logo";
 import { useEffect, useState } from "react";
 
 function LoadingScreen() {
+  const [percent, setPercent] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPercent(prev => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        return prev + 1;
+      });
+    }, 20);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <motion.div 
       exit={{ opacity: 0, scale: 1.1, filter: "blur(20px)" }}
@@ -30,11 +46,40 @@ function LoadingScreen() {
         className="absolute w-[500px] h-[500px] bg-[#a855f7]/20 rounded-full blur-[120px]"
       />
 
+      {/* Energy Flow Particles */}
+      <div className="absolute inset-0 pointer-events-none opacity-20">
+         {Array.from({ length: 20 }).map((_, i) => (
+           <motion.div
+             key={i}
+             initial={{ 
+               x: (i % 2 === 0 ? -100 : 100) + "%", 
+               y: Math.random() * 100 + "%",
+               opacity: 0 
+             }}
+             animate={{ 
+               x: "50%", 
+               y: "50%",
+               opacity: [0, 1, 0]
+             }}
+             transition={{ 
+               repeat: Infinity, 
+               duration: 2 + Math.random() * 2,
+               delay: Math.random() * 2,
+               ease: "circIn"
+             }}
+             className="absolute w-1 h-1 bg-[#a855f7] rounded-full shadow-[0_0_10px_#a855f7]"
+             style={{ left: 0, top: 0 }}
+           />
+         ))}
+      </div>
+
       <div className="relative z-10 flex flex-col items-center">
         <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          animate={{ 
+            scale: [1, 1.05, 1],
+            filter: ["drop-shadow(0 0 20px rgba(168,85,247,0.4))", "drop-shadow(0 0 40px rgba(168,85,247,0.8))", "drop-shadow(0 0 20px rgba(168,85,247,0.4))"]
+          }}
+          transition={{ repeat: Infinity, duration: 2 }}
         >
           <Logo className="w-48 h-48" />
         </motion.div>
@@ -42,37 +87,52 @@ function LoadingScreen() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.3 }}
           className="mt-12 flex flex-col items-center"
         >
-          <div className="flex items-center gap-3 text-[#a855f7] mb-4">
-             <Lock className="w-4 h-4 animate-pulse" />
-             <span className="text-[10px] font-black uppercase tracking-[0.4em]">Establishing Secure Connection</span>
+          <div className="flex items-center gap-3 text-[#a855f7] mb-2">
+             <Zap className="w-4 h-4 animate-bounce" />
+             <span className="text-[12px] font-black uppercase tracking-[0.5em]">System Energizing</span>
+          </div>
+
+          <div className="text-4xl font-black mb-6 italic tracking-tighter tabular-nums text-white/80">
+            {percent}%
           </div>
           
-          {/* Progress Bar */}
-          <div className="w-64 h-[2px] bg-white/5 rounded-full overflow-hidden relative">
+          {/* Stylized Battery Loader */}
+          <div className="w-64 h-8 border-2 border-white/10 rounded-lg p-1 relative flex gap-1 overflow-hidden">
+             {Array.from({ length: 10 }).map((_, i) => (
+               <motion.div 
+                 key={i}
+                 initial={{ opacity: 0 }}
+                 animate={{ opacity: percent > (i * 10) ? 1 : 0.1 }}
+                 className="flex-1 h-full bg-gradient-to-t from-[#a855f7] to-[#6366f1] rounded-sm shadow-[0_0_10px_rgba(168,85,247,0.5)]"
+               />
+             ))}
+             {/* Scanning Energy Line */}
              <motion.div 
-               initial={{ left: "-100%" }}
-               animate={{ left: "100%" }}
-               transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-               className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-[#a855f7] to-transparent shadow-[0_0_15px_#a855f7]"
+               animate={{ left: ["-10%", "110%"] }}
+               transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+               className="absolute top-0 bottom-0 w-8 bg-white/20 blur-sm -skew-x-12 pointer-events-none"
              />
           </div>
           
-          <div className="mt-4 flex gap-4 opacity-20">
-             {[Zap, Shield, Store].map((Icon, i) => (
-               <Icon key={i} className="w-4 h-4" />
-             ))}
+          <div className="mt-6 flex flex-col items-center gap-2">
+             <div className="flex gap-4 opacity-40">
+                <Battery className={`w-4 h-4 ${percent === 100 ? "text-green-400" : ""}`} />
+                <Shield className="w-4 h-4" />
+                <Store className="w-4 h-4" />
+             </div>
+             <p className="text-[8px] font-mono opacity-20 tracking-widest uppercase">Grid Sync: {percent > 80 ? "Stable" : "Synchronizing"}</p>
           </div>
         </motion.div>
       </div>
       
       {/* Technical Text Drift */}
       <div className="absolute bottom-10 left-10 opacity-10 font-mono text-[8px] space-y-1">
-         <p>PROTOCOL_HANDSHAKE: ACTIVE</p>
-         <p>ENCRYPTION_LAYER: AES-256</p>
-         <p>GRID_NODE_SYNC: 100%</p>
+         <p>CURRENT_VOLTAGE: 480V_DC</p>
+         <p>PHASE_ALIGNMENT: OPTIMAL</p>
+         <p>SECURE_OHM_NODE: 0x7E...4A</p>
       </div>
     </motion.div>
   );
@@ -84,7 +144,7 @@ export default function HybridLoginPortal() {
 
   useEffect(() => {
     setMounted(true);
-    const timer = setTimeout(() => setLoading(false), 2800);
+    const timer = setTimeout(() => setLoading(false), 3200);
     return () => clearTimeout(timer);
   }, []);
 
