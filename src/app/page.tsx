@@ -18,6 +18,27 @@ export default function HybridLoginPortal() {
     setMounted(true);
   }, []);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.5
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: { type: "spring", stiffness: 100 }
+    }
+  };
+
   return (
     <main className="min-h-screen bg-[#0d091a] text-white flex flex-col items-center justify-center p-4 relative overflow-hidden font-sans">
       
@@ -38,15 +59,19 @@ export default function HybridLoginPortal() {
       </div>
 
       {/* Main Container */}
-      <div className="max-w-7xl w-full flex flex-col items-center z-10 py-4">
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="max-w-7xl w-full flex flex-col items-center z-10 py-4"
+      >
         
-        <div className="w-full flex flex-col md:flex-row items-stretch justify-center gap-0 relative">
+        <div className="w-full flex flex-col md:flex-row items-center justify-center gap-0 relative">
           
           {/* Left Side: DRIVER PORTAL */}
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex-1 flex flex-col items-center p-4 relative group"
+            variants={cardVariants}
+            className="flex-1 flex flex-col items-center p-4 relative group w-full"
           >
             <div className="text-center mb-4">
               <h2 className="text-sm font-bold tracking-[0.2em] uppercase text-white/40">User: Find a Charger</h2>
@@ -55,7 +80,6 @@ export default function HybridLoginPortal() {
             {/* Technical Map Decoration */}
             <div className="absolute top-16 left-8 right-8 h-48 opacity-20 pointer-events-none">
                <div className="w-full h-full border border-[#a855f7]/20 rounded-2xl bg-black/40 overflow-hidden relative">
-                  {/* Laser Scan Effect */}
                   <motion.div 
                     animate={{ top: ["-10%", "110%"] }}
                     transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
@@ -75,7 +99,7 @@ export default function HybridLoginPortal() {
             {/* Feature Card */}
             <motion.div 
               whileHover={{ scale: 1.02, translateY: -5 }}
-              className="glass-card w-full max-w-sm p-8 relative z-20 mt-6 flex flex-col items-center text-center transition-all duration-500 hover:border-[#a855f7]/40"
+              className="glass-card w-full max-w-sm p-8 relative z-20 mt-6 flex flex-col items-center text-center transition-all duration-500 hover:border-[#a855f7]/40 h-full"
             >
                <div className="w-12 h-12 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center mb-6 shadow-inner group-hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] transition-all">
                   <User className="w-6 h-6 text-[#a855f7]" />
@@ -100,8 +124,8 @@ export default function HybridLoginPortal() {
             </motion.div>
           </motion.div>
 
-          {/* CENTRAL DIVIDER - ENERGY PULSE SYSTEM */}
-          <div className="hidden md:flex flex-col items-center relative w-16">
+          {/* CENTRAL DIVIDER - ALIGNED PROPERLY */}
+          <div className="hidden md:flex flex-col items-center relative w-16 self-stretch">
              {/* Line Top */}
              <div className="flex-1 w-[2px] bg-gradient-to-t from-[#a855f7] to-transparent shadow-[0_0_20px_#a855f7] relative overflow-hidden">
                 <motion.div 
@@ -111,14 +135,10 @@ export default function HybridLoginPortal() {
                 />
              </div>
              
-             {/* Logo Container */}
-             <motion.div 
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                className="z-30 py-8 flex items-center justify-center"
-             >
-               <Logo className="w-32 h-32 drop-shadow-[0_0_40px_rgba(168,85,247,0.6)]" />
-             </motion.div>
+             {/* Logo Container - The Centerpiece */}
+             <div className="z-30 py-8 flex items-center justify-center">
+               <Logo className="w-32 h-32" />
+             </div>
 
              {/* Line Bottom */}
              <div className="flex-1 w-[2px] bg-gradient-to-b from-[#a855f7] to-transparent shadow-[0_0_20px_#a855f7] relative overflow-hidden">
@@ -132,9 +152,8 @@ export default function HybridLoginPortal() {
 
           {/* Right Side: HOST PORTAL */}
           <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex-1 flex flex-col items-center p-4 relative group"
+            variants={cardVariants}
+            className="flex-1 flex flex-col items-center p-4 relative group w-full"
           >
             <div className="text-center mb-4">
               <h2 className="text-sm font-bold tracking-[0.2em] uppercase text-white/40">Host: List Your Charger</h2>
@@ -143,7 +162,6 @@ export default function HybridLoginPortal() {
             {/* Technical Chart Decoration */}
             <div className="absolute top-16 left-8 right-8 h-48 opacity-20 pointer-events-none">
                <div className="w-full h-full border border-[#6366f1]/20 rounded-2xl bg-black/40 overflow-hidden relative">
-                  {/* Laser Scan Effect */}
                   <motion.div 
                     animate={{ top: ["110%", "-10%"] }}
                     transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
@@ -159,7 +177,7 @@ export default function HybridLoginPortal() {
             {/* Feature Card */}
             <motion.div 
               whileHover={{ scale: 1.02, translateY: -5 }}
-              className="glass-card w-full max-sm p-8 relative z-20 mt-6 flex flex-col items-center text-center transition-all duration-500 hover:border-[#6366f1]/40"
+              className="glass-card w-full max-w-sm p-8 relative z-20 mt-6 flex flex-col items-center text-center transition-all duration-500 hover:border-[#6366f1]/40 h-full"
             >
                <div className="w-12 h-12 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center mb-6 shadow-inner group-hover:shadow-[0_0_20px_rgba(99,102,241,0.2)] transition-all">
                   <Store className="w-6 h-6 text-[#6366f1]" />
@@ -188,9 +206,7 @@ export default function HybridLoginPortal() {
 
         {/* Unified Subsurface Branding */}
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+          variants={cardVariants}
           className="mt-12 text-center space-y-3"
         >
           <div className="flex items-center justify-center gap-4">
@@ -211,7 +227,7 @@ export default function HybridLoginPortal() {
           </p>
         </motion.div>
 
-      </div>
+      </motion.div>
 
     </main>
   );
